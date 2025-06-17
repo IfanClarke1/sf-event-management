@@ -5,6 +5,7 @@ import com.secureflag.application_events.BookingCreatedEvent;
 import com.secureflag.dao.BookingsRepository;
 import com.secureflag.dto.BookEventDto;
 import com.secureflag.dto.BookingDto;
+import com.secureflag.entity.BookingWaitlist;
 import com.secureflag.entity.Bookings;
 import com.secureflag.entity.Events;
 import com.secureflag.enums.BookingStatus;
@@ -18,6 +19,7 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -48,13 +50,13 @@ public class BookingServiceImpl implements BookingService {
             bookEventDto.setStatus(BookingStatus.SUCCESSFUL);
         }
 
-        Bookings newBooking = createBooking(userId, bookEventDto);
+        Bookings newBooking = createBooking(userId, event.getId(), event.getAmount(), bookEventDto);
 
         updateEventAvailableCapacity(event);
 
         publish(new BookingCreatedEvent(this, newBooking));
 
-        return BookingDto.fromModel(newBooking);
+        return BookingDto.fromModel(newBooking, event);
     }
 
     @Override
@@ -82,25 +84,26 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional
     public Bookings processWaitList(Bookings cancelledBooking) throws NotFoundException {
-       Bookings waitlistBooking = bookingsRepository.findFirstWaitListedBooking()
+       BookingWaitlist waitlistBooking = bookingsRepository.findFirstWaitListedBooking(cancelledBooking.getReference())
                .orElseThrow(() -> new NotFoundException("Booking not found"));
 
-       waitlistBooking.setStatus(BookingStatus.SUCCESSFUL);
-       waitlistBooking.setUserId(cancelledBooking.getUserId());
+        cancelledBooking.setStatus(BookingStatus.SUCCESSFUL);
+        cancelledBooking.setUserId(waitlistBooking.getId());
 
         Bookings successfulBooking = bookingsRepository.save(cancelledBooking);
 
-        publish(new BookingCreatedEvent(this, waitlistBooking));
+        publish(new BookingCreatedEvent(this, cancelledBooking));
 
        return successfulBooking;
     }
 
-    private Bookings createBooking(Long userId, BookEventDto bookEventDto) {
+    private Bookings createBooking(Long userId, Long eventId, BigDecimal eventAmount, BookEventDto bookEventDto) {
         Bookings booking = new Bookings();
         booking.setUserId(userId);
         booking.setType(bookEventDto.getBookingType());
         booking.setStatus(bookEventDto.getStatus());
-
+        booking.setEventId(eventId);
+        booking.setFee(eventAmount);
         return bookingsRepository.save(booking);
     }
 

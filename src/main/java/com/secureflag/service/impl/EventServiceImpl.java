@@ -2,6 +2,7 @@ package com.secureflag.service.impl;
 
 import com.secureflag.dao.EventsRepository;
 import com.secureflag.dto.EventDto;
+import com.secureflag.dto.EventProjection;
 import com.secureflag.dto.PageDto;
 import com.secureflag.entity.Events;
 import com.secureflag.enums.EventStatus;
@@ -43,9 +44,9 @@ public class EventServiceImpl implements EventService {
     @Override
     public PageDto listEvents(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Events> events = eventsRepository
-                .findAllByStatusIn(Arrays.asList(EventStatus.OPEN, EventStatus.FULLY_BOOKED), pageable);
-        return PageDto.build(events, EventDto::fromModel);
+        Page<EventProjection> events = eventsRepository
+                .findAllByStatusIn(Arrays.asList(EventStatus.OPEN.name(), EventStatus.FULLY_BOOKED.name()), pageable);
+        return PageDto.build(events, EventDto::fromProjection);
     }
 
     @Override

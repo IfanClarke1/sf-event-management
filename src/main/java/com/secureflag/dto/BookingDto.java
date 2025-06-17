@@ -3,13 +3,21 @@ package com.secureflag.dto;
 import com.secureflag.entity.Bookings;
 import com.secureflag.entity.Events;
 import com.secureflag.enums.BookingStatus;
+import com.secureflag.enums.BookingType;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+@ToString
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookingDto {
@@ -24,9 +32,17 @@ public class BookingDto {
 
     private Integer admissionNumber;
 
-    public static BookingDto fromModel(Bookings booking){
+    private BookingType type;
+
+    private String eventName;
+
+    private String eventVenue;
+
+    public static BookingDto fromModel(Bookings booking, Events event){
         BookingDto bookingDto = new BookingDto();
         BeanUtils.copyProperties(booking, bookingDto);
+        bookingDto.setEventName(event.getTheme());
+        bookingDto.setEventVenue(event.getVenue());
         return bookingDto;
     }
 

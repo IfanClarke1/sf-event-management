@@ -46,4 +46,22 @@ public class EventDto {
     public static Object fromModel(Object o) {
         return fromModel((Events) o);
     }
+
+    public static Object fromProjection(Object o) {
+        return fromProjection((EventProjection) o);
+    }
+
+    public static EventDto fromProjection(EventProjection eventProjection){
+        EventDto eventDto = new EventDto();
+        eventDto.setAmount(eventProjection.getAmount());
+        eventDto.setStatus(eventProjection.getStatus());
+        eventDto.setReference(eventProjection.getReference());
+        eventDto.setTheme(eventProjection.getTheme());
+        eventDto.setVenue(eventProjection.getVenue());
+        eventDto.setTotalCapacity(eventProjection.getTotalCapacity());
+        eventDto.setAvailableCapacity(eventProjection.getAvailableCapacity());
+        eventDto.setStartTime(eventProjection.getStartTime());
+        eventDto.setEndTime(eventProjection.getEndTime());
+        return eventDto;
+    }
 }

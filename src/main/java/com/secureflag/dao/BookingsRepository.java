@@ -1,5 +1,6 @@
 package com.secureflag.dao;
 
+import com.secureflag.entity.BookingWaitlist;
 import com.secureflag.entity.Bookings;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,7 +22,7 @@ public interface BookingsRepository extends JpaRepository<Bookings, Long> {
     Optional<Bookings> findByUserIdAndReference(@Param("userId") Long userId,
                                                 @Param("reference") String reference);
 
-    @Query(value = "SELECT id, status FROM bookings WHERE status = 'WAIT_LISTED' ORDER BY created_at ASC LIMIT 1 FOR UPDATE",
+    @Query(value = "SELECT id, status FROM bookings WHERE status = 'WAIT_LISTED' AND reference=:eventReference ORDER BY created_at ASC LIMIT 1 FOR UPDATE",
             nativeQuery = true)
-    Optional<Bookings> findFirstWaitListedBooking();
+    Optional<BookingWaitlist> findFirstWaitListedBooking(String eventReference);
 }

@@ -24,11 +24,11 @@ public abstract class BaseEntity {
     @Column(nullable = false)
     private long id;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, name = "created_at")
     @CreationTimestamp
     private Date createdAt;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "updated_at")
     @UpdateTimestamp
     private Date updatedAt;
 

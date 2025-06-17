@@ -1,5 +1,6 @@
 package com.secureflag.dao;
 
+import com.secureflag.dto.EventProjection;
 import com.secureflag.entity.Events;
 import com.secureflag.enums.EventStatus;
 import jakarta.persistence.LockModeType;
@@ -12,25 +13,35 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Repository
 public interface EventsRepository extends JpaRepository<Events, Long> {
     @Query(value = """
-                   SELECT e.id, e.reference, e.amount, e.status, e.venue, e.theme,
-                          e.total_capacity, e.available_capacity, e.start_time, e.end_time
-                   FROM events e
-                   WHERE e.status IN :statuses
-                   ORDER BY e.start_time DESC
-                   """, nativeQuery = true)
-    Page<Events> findAllByStatusIn(List<EventStatus> statuses, Pageable pageable);
+            SELECT e.id, e.reference, e.amount, e.status, e.venue, e.theme,
+                   e.total_capacity, e.available_capacity, e.start_time, e.end_time
+            FROM events e
+            WHERE e.status IN :statuses
+            ORDER BY e.created_at DESC
+            """,
+            countQuery = """
+                    SELECT count(e.id)
+                    FROM events e
+                    WHERE e.status IN :statuses
+                    """,
+            nativeQuery = true)
+    Page<EventProjection> findAllByStatusIn(
+            @Param("statuses") List<String> statuses,
+            Pageable pageable
+    );
 
     @Query(value = """
-                   SELECT e.id, e.reference, e.amount, e.status, e.venue, e.theme,
-                          e.total_capacity, e.available_capacity, e.start_time, e.end_time
-                   FROM events e
-                   WHERE e.reference = :reference
-                   """, nativeQuery = true)
+            SELECT e.id, e.reference, e.amount, e.status, e.venue, e.theme,
+                   e.total_capacity, e.available_capacity, e.start_time, e.end_time
+            FROM events e
+            WHERE e.reference = :reference
+            """, nativeQuery = true)
     Optional<Events> findByReference(String reference);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)

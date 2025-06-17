@@ -1,6 +1,7 @@
 package com.secureflag.controller;
 
 import com.secureflag.dto.BookEventDto;
+import com.secureflag.dto.BookingDto;
 import com.secureflag.exceptions.EventFullyBookedException;
 import com.secureflag.exceptions.NotFoundException;
 import com.secureflag.service.BookingService;

@@ -8,6 +8,6 @@ public class EmailNotificationService implements NotificationService {
 
     @Override
     public void notify(Long userId, Long eventId) {
-
+        System.out.println("Email Notification Triggered!!!");
     }
 }
