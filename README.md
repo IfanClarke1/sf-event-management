@@ -20,7 +20,7 @@ _Note: This can be presented in a concise format, such as a list of bullet point
 ### 2. **Automated Tests**
 Implement a test suite using your preferred language and framework (e.g., Java with JUnit/TestNG and RestAssured, or Python with Pytest and Requests). 
 However, since most of our codebase is written in Java, we recommend using Java for consistency.
-- Cover basic functionalities: book/cancel an event.
+- Cover basic functionalities: make/cancel a booking for an event.
 - Demonstrate test setup/teardown and assertions.
 - Include at least one parameterized or data-driven test.
 
