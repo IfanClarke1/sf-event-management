@@ -1,7 +1,7 @@
 package com.secureflag.service.impl;
 
-import com.secureflag.application_events.BookingCancelledEvent;
-import com.secureflag.application_events.BookingCreatedEvent;
+import com.secureflag.events.BookingCancelledEvent;
+import com.secureflag.events.BookingCreatedEvent;
 import com.secureflag.dao.BookingsRepository;
 import com.secureflag.dto.BookEventDto;
 import com.secureflag.dto.BookingDto;
@@ -84,8 +84,8 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional
     public Bookings processWaitList(Bookings cancelledBooking) throws NotFoundException {
-       BookingWaitlist waitlistBooking = bookingsRepository.findFirstWaitListedBooking(cancelledBooking.getReference())
-               .orElseThrow(() -> new NotFoundException("Booking not found"));
+        BookingWaitlist waitlistBooking = bookingsRepository.findFirstWaitListedBooking(cancelledBooking.getReference())
+                .orElseThrow(() -> new NotFoundException("Booking not found"));
 
         cancelledBooking.setStatus(BookingStatus.SUCCESSFUL);
         cancelledBooking.setUserId(waitlistBooking.getId());
@@ -94,7 +94,7 @@ public class BookingServiceImpl implements BookingService {
 
         publish(new BookingCreatedEvent(this, cancelledBooking));
 
-       return successfulBooking;
+        return successfulBooking;
     }
 
     private Bookings createBooking(Long userId, Long eventId, BigDecimal eventAmount, BookEventDto bookEventDto) {

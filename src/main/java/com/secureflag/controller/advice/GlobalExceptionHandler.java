@@ -1,6 +1,7 @@
 package com.secureflag.controller.advice;
 
 import com.secureflag.exceptions.EventFullyBookedException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,8 +12,10 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(EventFullyBookedException.class)
     public ResponseEntity<Object> handleEventFullyBookedException(
             EventFullyBookedException ex, WebRequest request) {
@@ -30,6 +33,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllUncaughtException(
             Exception ex, WebRequest request) {
+
+        log.error(ex.getMessage(), ex);
 
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());

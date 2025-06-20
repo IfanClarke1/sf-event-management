@@ -11,7 +11,5 @@ public interface BookingService {
     BookingDto bookEvent(Long userId, BookEventDto bookEventDto) throws EventFullyBookedException, NotFoundException;
     void CancelBooking(Long userId, String reference)throws NotFoundException;
 
-    Bookings updateBookingStatus(Long bookingId, BookingStatus status) throws NotFoundException;
-
     Bookings processWaitList(Bookings bookings) throws NotFoundException;
 }

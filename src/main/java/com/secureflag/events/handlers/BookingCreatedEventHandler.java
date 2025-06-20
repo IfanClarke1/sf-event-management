@@ -1,6 +1,6 @@
-package com.secureflag.application_events.handlers;
+package com.secureflag.events.handlers;
 
-import com.secureflag.application_events.BookingCreatedEvent;
+import com.secureflag.events.BookingCreatedEvent;
 import com.secureflag.entity.Bookings;
 import com.secureflag.service.NotificationService;
 import lombok.RequiredArgsConstructor;

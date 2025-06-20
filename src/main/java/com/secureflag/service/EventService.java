@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface EventService {
 
-    EventDto  create(EventDto eventDto);
+    EventDto create(EventDto eventDto);
 
-    PageDto    listEvents(int page, int size);
+    PageDto listEvents(int page, int size);
 
     Optional<Events> findByReferenceWithLock(String eventReference);
 

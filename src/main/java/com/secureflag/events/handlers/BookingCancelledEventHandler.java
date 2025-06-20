@@ -1,6 +1,6 @@
-package com.secureflag.application_events.handlers;
+package com.secureflag.events.handlers;
 
-import com.secureflag.application_events.BookingCancelledEvent;
+import com.secureflag.events.BookingCancelledEvent;
 import com.secureflag.entity.Bookings;
 import com.secureflag.exceptions.NotFoundException;
 import com.secureflag.service.BookingService;
