@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "6e58bac0-4cc0-4e5f-8039-c50e72812460",
+		"name": "secureflag-interview",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45718840",
+		"_collection_link": "https://olalekan-6610778.postman.co/workspace/Olalekan's-Workspace~f8755cc5-a4c5-4ed7-8662-65416b3aac72/collection/45718840-6e58bac0-4cc0-4e5f-8039-c50e72812460?action=share&source=collection_link&creator=45718840"
+	},
+	"item": [
+		{
+			"name": "List Events",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/events",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"events"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "successful",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userId",
+								"value": "1234555",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"events"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Jun 2025 00:47:32 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"SUCCESS\",\n    \"data\": [\n        {\n            \"theme\": \"Art Showcase\",\n            \"reference\": \"123e4567-e89b-12d3-a456-426614174000\",\n            \"createdAt\": null,\n            \"amount\": 20,\n            \"status\": \"OPEN\",\n            \"venue\": \"Gallery District\",\n            \"totalCapacity\": 0,\n            \"availableCapacity\": 35,\n            \"startTime\": \"2025-07-15T10:00:00.000+00:00\",\n            \"endTime\": \"2025-07-15T16:00:00.000+00:00\"\n        },\n        {\n            \"theme\": \"Music Festival\",\n            \"reference\": \"550e8400-e29b-41d4-a716-446655440000\",\n            \"createdAt\": null,\n            \"amount\": 55,\n            \"status\": \"FULLY_BOOKED\",\n            \"venue\": \"Open Air Stage\",\n            \"totalCapacity\": 0,\n            \"availableCapacity\": 0,\n            \"startTime\": \"2025-08-01T14:00:00.000+00:00\",\n            \"endTime\": \"2025-08-01T22:00:00.000+00:00\"\n        },\n        {\n            \"theme\": \"AI Summit\",\n            \"reference\": \"c0a8015a-000f-11ee-be56-0242ac120002\",\n            \"createdAt\": null,\n            \"amount\": 75,\n            \"status\": \"FULLY_BOOKED\",\n            \"venue\": \"Tech Pavilion\",\n            \"totalCapacity\": 0,\n            \"availableCapacity\": 0,\n            \"startTime\": \"2025-07-01T09:00:00.000+00:00\",\n            \"endTime\": \"2025-07-01T17:00:00.000+00:00\"\n        },\n        {\n            \"theme\": \"Tech Conference\",\n            \"reference\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n            \"createdAt\": null,\n            \"amount\": 30,\n            \"status\": \"OPEN\",\n            \"venue\": \"Convention Center A\",\n            \"totalCapacity\": 0,\n            \"availableCapacity\": 40,\n            \"startTime\": \"2025-06-10T08:00:00.000+00:00\",\n            \"endTime\": \"2025-06-10T16:00:00.000+00:00\"\n        }\n    ],\n    \"hasMore\": false,\n    \"currentPage\": 0,\n    \"totalPages\": 1,\n    \"totalItems\": 4\n}"
+				}
+			]
+		},
+		{
+			"name": "Book Event",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "userId",
+						"value": "12345",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"eventReference\": {{eventReference}},\n    \"bookingType\":\"REGULAR\",\n    \"shouldWaitList\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/bookings",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"bookings"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "userId",
+								"value": "12345",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"eventReference\":\"550e8400-e29b-41d4-a716-446655440000\",\n    \"bookingType\":\"REGULAR\",\n    \"shouldWaitList\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"bookings"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Jun 2025 01:26:10 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"reference\": \"6ffec1c162fb4a3ea8f6d5be83effafc\",\n    \"createdAt\": \"2025-06-17T01:26:10.035+00:00\",\n    \"fee\": 55,\n    \"status\": \"WAIT_LISTED\",\n    \"admissionNumber\": null,\n    \"type\": \"REGULAR\",\n    \"eventName\": \"Music Festival\",\n    \"eventVenue\": \"Open Air Stage\"\n}"
+				}
+			]
+		},
+		{
+			"name": "cancel booking",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "userId",
+						"value": "12345",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/v1/bookings/{{bookingReference}}/cancel",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"bookings",
+						"{{bookingReference}}",
+						"cancel"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
