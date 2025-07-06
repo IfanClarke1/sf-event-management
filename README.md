@@ -19,9 +19,11 @@ _Note: This can be presented in a concise format, such as a list of bullet point
 
 - Bookings and Events
 - Bookings need to creatable and cancellable
-- An error should be returned if a non-existing booking is cancelled
+- An error should be returned if a cancellation is attempted of a non-existing booking
 - An error should also be returned if an attempt is made to make a booking for a fully-booked event (EventFullyBookedException)
+- An error should be returned if there is a missing or null userId header
 - Events need to be creatable and listable
+- Invalid EventDTO (e.g missing fields)
 - I would test this with JUnit and Mockito to mock data
 - Performance testing with JMeter, Security testing could take the form of API endpoint testing with tools like Postman and also Burp Suite to interrupt API traffic
   
