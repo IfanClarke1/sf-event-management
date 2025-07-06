@@ -17,6 +17,14 @@ Write a short test plan (1-2 pages) describing:
 
 _Note: This can be presented in a concise format, such as a list of bullet points._
 
+- Bookings and Events
+- Bookings need to creatable and cancellable
+- An error should be returned if a non-existing booking is cancelled
+- An error should also be returned if an attempt is made to make a booking for a fully-booked event (EventFullyBookedException)
+- Events need to be creatable and listable
+- I would test this with JUnit and Mockito to mock data
+- Performance testing with JMeter, Security testing could take the form of API endpoint testing with tools like Postman and also Burp Suite to interrupt API traffic
+  
 ### 2. **Automated Tests**
 Implement a test suite using your preferred language and framework (e.g., Java with JUnit/TestNG and RestAssured, or Python with Pytest and Requests). 
 However, since most of our codebase is written in Java, we recommend using Java for consistency.
